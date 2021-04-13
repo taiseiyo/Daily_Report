@@ -1,4 +1,4 @@
-let choose_Active_Sheet = (num) =>{
+let choose_Active_Sheet = (num) => {
   let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   let name = spreadsheet.getSheets()[num].getName();
   let activesheet = SpreadsheetApp.getActive().getSheetByName(name);
@@ -32,7 +32,7 @@ let deleteSheet1Cell = () => {
 };
 
 let graph = () => {
-  let spreadsheet = choose_Active_Sheet(0);;
+  let spreadsheet = choose_Active_Sheet(0);
   let range = spreadsheet.getDataRange().getValues();
   range = range.splice(0, 2);
   let values = [];
@@ -71,3 +71,9 @@ let changeGraph = (spreadsheet) => {
 };
 
 // Sheet2 script
+
+let deleteSheet2Cell = () => {
+  let spreadsheet = choose_Active_Sheet(1);
+  let range = spreadsheet.getRange(2, 2, spreadsheet.getLastRow() - 1, 1);
+  range.clear();
+};
