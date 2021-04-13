@@ -1,5 +1,14 @@
+let choose_Active_Sheet = (num) =>{
+  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  let name = spreadsheet.getSheets()[num].getName();
+  let activesheet = SpreadsheetApp.getActive().getSheetByName(name);
+  return activesheet;
+};
+
+// Sheet1 script
+
 let colorCell = () => {
-  let spreadsheet = SpreadsheetApp.getActiveSheet();
+  let spreadsheet = choose_Active_Sheet(0);
   let range = spreadsheet.getRange(2, 2, 1, spreadsheet.getLastColumn() - 1);
   let time_values = range.getValues()[0];
 
@@ -14,8 +23,8 @@ let colorCell = () => {
   }
 };
 
-let deleteCell = () => {
-  let spreadsheet = SpreadsheetApp.getActiveSheet();
+let deleteSheet1Cell = () => {
+  let spreadsheet = choose_Active_Sheet(0);
   let range = spreadsheet.getRange(2, 2, 1, spreadsheet.getLastColumn() - 1);
   let tmp = SpreadsheetApp.getActiveSheet().getRange("A70:B75");
   tmp.clearContent();
@@ -23,7 +32,7 @@ let deleteCell = () => {
 };
 
 let graph = () => {
-  let spreadsheet = SpreadsheetApp.getActiveSheet();
+  let spreadsheet = choose_Active_Sheet(0);;
   let range = spreadsheet.getDataRange().getValues();
   range = range.splice(0, 2);
   let values = [];
@@ -32,7 +41,7 @@ let graph = () => {
     values.push([range[0][i], range[1][i]]);
   }
 
-  let tmp = SpreadsheetApp.getActiveSheet().getRange("A70:B75");
+  let tmp = spreadsheet.getRange("A70:B75");
   tmp.setValues(values);
 
   if (spreadsheet.getCharts()[0] == undefined) {
@@ -60,3 +69,5 @@ let changeGraph = (spreadsheet) => {
 
   spreadsheet.updateChart(newchart);
 };
+
+// Sheet2 script
